@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Countdown to Paris climate talks</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/flipclock.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/style.css">
+
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container" style="margin-top: 15%">
+    <h3 class="site-header">Countdown to the Paris climate talks</h3>
+    <div class="row">
+      <div class="three columns">
+        <p>If ever there was a time for action, it's now. And it's running out. What will you do to ensure success at COP21?</p>
+      </div>
+    </div>
+    <div class="row">
+       <!-- <div class="nine columns"> -->
+
+       <div class="">
+         <div class="clock"></div>
+       </div>
+    </div>
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="js/vendor/flipclock.js"></script> <!-- .min -->
+<script>
+  $(document).ready(function () {
+    // Grab the current date
+    var currentDate = new Date();
+    var eventStart = new Date("Nov 30, 2015");
+
+    // Calculate the difference in seconds between the future and current date
+    var diff = eventStart.getTime() / 1000 - currentDate.getTime() / 1000;
+
+    // Instantiate a coutdown FlipClock
+    clock = $('.clock').FlipClock(diff, {
+      clockFace: 'WeeklyCounter',
+      // clockFace: 'DailyCounter',
+
+      // showSeconds: true,
+      countdown: true,
+    });
+  });
+</script>
+</body>
+</html>
