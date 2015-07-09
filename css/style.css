@@ -1,3 +1,8 @@
+
+.site-header a {
+	text-decoration: none;
+}
+
 .site-header, .clock {
 	margin-bottom: 36px;
 }
