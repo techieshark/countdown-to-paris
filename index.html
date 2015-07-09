@@ -38,6 +38,8 @@
     <h3 class="site-header">Countdown to the <a href="http://www.theguardian.com/world/2015/jun/14/paris-climate-meeting-vital">Paris climate talks</a></h3>
     <div class="clock"></div>
     <p>If ever there was a time for action, it's now. And it's running out. What will you do to ensure success at COP21?</p>
+    <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Act%20now%20on%20#climate&hashtags=cop21,countdown2paris,climate" data-size="large">Tweet</a>
+    <div id="tweet-container"></div>
   </div>
 
 <!-- End Document
@@ -63,6 +65,8 @@
       countdown: true,
     });
   });
+
+
   // Load Google Analytics
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -70,6 +74,85 @@
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
   ga('create', 'UA-42432051-2', 'auto');
   ga('send', 'pageview');
+
+
+
+  // Load Twitter widgets.js async
+  window.twttr = (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+      t = window.twttr || {};
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+
+    t._e = [];
+    t.ready = function(f) {
+      t._e.push(f);
+    };
+
+    return t;
+  }(document, "script", "twitter-wjs"));
+
+
+
+  // Log any kind of Web Intent event to Google Analytics
+  // Category: "twitter_web_intents"
+  // Action: Intent Event Type
+  // Label: Identifier for action taken: tweet_id, screen_name/user_id, click region
+
+  // Define our custom event handlers
+  function clickEventToAnalytics (intentEvent) {
+    if (!intentEvent) return;
+    var label = intentEvent.region;
+    pageTracker._trackEvent('twitter_web_intents', intentEvent.type, label);
+  }
+
+  function tweetIntentToAnalytics (intentEvent) {
+    if (!intentEvent) return;
+    var label = "tweet";
+    pageTracker._trackEvent(
+      'twitter_web_intents',
+      intentEvent.type,
+      label
+    );
+  }
+
+  // Wait for the asynchronous resources to load
+  twttr.ready(function (twttr) {
+    // Now bind our custom intent events
+    twttr.events.bind('click', clickEventToAnalytics);
+    twttr.events.bind('tweet', tweetIntentToAnalytics);
+    // twttr.events.bind('retweet', retweetIntentToAnalytics);
+    // twttr.events.bind('favorite', favIntentToAnalytics);
+    // twttr.events.bind('follow', followIntentToAnalytics);
+
+    twttr.widgets.createShareButton(
+      'https://techieshark.github.io/countdown-to-paris/',
+      document.getElementById('tweet-container'),
+      {
+        text: 'Only 123 days until the #COP21 Paris #climate talks. #Portland friends, let\'s join this fight!',
+        hashtags: 'cntdwn2paris',
+        size: 'large'
+      }
+    );
+
+    twttr.widgets.createHashtagButton(
+      "cntdwn2paris",
+      document.getElementById("tweet-container"),
+      {
+        text: 'Only 123 days until the #COP21 Paris #climate talks. #Portland friends, let\'s join this fight!',
+        size:"large"
+      }
+    );
+
+  });
+
+
+
+
+
 </script>
 </body>
 </html>
