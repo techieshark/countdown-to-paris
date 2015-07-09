@@ -7,6 +7,10 @@
 	margin-bottom: 36px;
 }
 
+div#tweet-container > * {
+	margin-right: 1em; /* space between twitter buttons */
+}
+
 .clock {
 	margin-left: 0px;
 }
