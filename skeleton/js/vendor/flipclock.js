@@ -2222,7 +2222,7 @@ var FlipClock;
 
 			$(this.createDivider('Minutes')).insertBefore(this.lists[this.lists.length - 4 + offset].$el);
 			$(this.createDivider('Hours')).insertBefore(this.lists[this.lists.length - 6 + offset].$el);
-			$(this.createDivider('Days', true)).insertBefore(this.lists[0].$el);
+			$(this.createDivider('Days')).insertBefore(this.lists[this.lists.length - 8 + offset].$el);
 			$(this.createDivider('Weeks', true)).insertBefore(this.lists[0].$el);
 
 
@@ -2235,7 +2235,7 @@ var FlipClock;
 
 		flip: function(time, doNotAddPlayClass) {
 			if(!time) {
-				time = this.factory.time.getDayCounter(this.showSeconds);
+				time = this.factory.time.getWeekCounter(this.showSeconds);
 			}
 
 			this.autoIncrement();
