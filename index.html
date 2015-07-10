@@ -58,9 +58,6 @@
     // Instantiate a coutdown FlipClock
     clock = $('.clock').FlipClock(diff, {
       clockFace: 'WeeklyCounter',
-      // clockFace: 'DailyCounter',
-
-      // showSeconds: true,
       countdown: true,
     });
   });
@@ -123,10 +120,6 @@
     // Now bind our custom intent events
     twttr.events.bind('click', clickEventToAnalytics);
     twttr.events.bind('tweet', tweetIntentToAnalytics);
-    // twttr.events.bind('retweet', retweetIntentToAnalytics);
-    // twttr.events.bind('favorite', favIntentToAnalytics);
-    // twttr.events.bind('follow', followIntentToAnalytics);
-
     twttr.widgets.createShareButton(
       'https://techieshark.github.io/countdown-to-paris/',
       document.getElementById('tweet-container'),
@@ -137,13 +130,7 @@
         counturl: 'http://www.theguardian.com/world/2015/jun/14/paris-climate-meeting-vital'
       }
     );
-
   });
-
-
-
-
-
 </script>
 </body>
 </html>
