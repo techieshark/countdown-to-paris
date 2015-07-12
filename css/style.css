@@ -66,6 +66,23 @@ div#tweet-container > * {
 	display: none;
 }*/
 
+.flip-clock-wrapper ul.flip li a div div.inn
+{
+	background-color: #333;
+	/*background-color: firebrick;*/
+
+}
+
+.flip-clock-divider.weeks + ul.flip li a div div.inn,
+.flip-clock-divider.weeks + ul.flip + ul.flip li a div div.inn,
+.flip-clock-divider.days + ul.flip li a div div.inn,
+.flip-clock-divider.days + ul.flip + ul.flip li a div div.inn {
+	background-color: firebrick;
+	/*background-color: #333;*/
+
+}
+
+
 @media (max-width: 600px) {
   .facet_sidebar {
     display: none;
