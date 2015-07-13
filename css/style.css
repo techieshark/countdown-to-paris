@@ -73,6 +73,9 @@ div#tweet-container > * {
 
 }
 
+
+.flip-clock-divider.months + ul.flip li a div div.inn,
+.flip-clock-divider.months + ul.flip + ul.flip li a div div.inn,
 .flip-clock-divider.weeks + ul.flip li a div div.inn,
 .flip-clock-divider.weeks + ul.flip + ul.flip li a div div.inn,
 .flip-clock-divider.days + ul.flip li a div div.inn,
