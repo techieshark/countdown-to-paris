@@ -19,42 +19,42 @@ div#tweet-container > * {
 	margin-left: 0px;
 }
 
-.text-clock {
+#text-clock {
 	font-size: 2em;
 }
 
-.text-clock .months {
+#text-clock .months {
 }
 
-.text-clock .hours {
+#text-clock .hours {
     font-size: 1.5em;
     margin-top: -20px;
 }
 
-.text-clock .minutes {
+#text-clock .minutes {
     font-size: 1.75em;
     margin-top: -36px;
 }
 
-.text-clock .seconds {
+#text-clock .seconds {
     font-size: 2em;
     margin-top: -42px;
 }
 
-.text-clock .days {
+#text-clock .days {
     margin-top: -14px;
 }
 
-.text-clock .months span.label {
+#text-clock .months span.label {
     font-size: .66em;
 }
 
-.text-clock .months span.number {
+#text-clock .months span.number {
     margin-left: 2px;
     margin-right: 0px;
 }
 
-.text-clock .seconds span.label {
+#text-clock .seconds span.label {
     font-size: .75em;
 }
 
@@ -167,7 +167,7 @@ div#tweet-container > * {
 
 /* On small screens we just can't fit the fancy countdown */
 @media screen and (min-width: 500px) {
-	.text-clock {
+	#text-clock {
 		display: none;
 	}
 }
