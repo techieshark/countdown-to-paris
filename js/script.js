@@ -1,7 +1,11 @@
+var window, twttr;
+
+(function () {
+
+  var clock;
 
   $(document).ready(function () {
     // Grab the current date
-    var currentDate = new Date();
     var eventStart = new Date("30 Nov 2015 09:00:00 +0100");
     // var eventStart = new Date("30 Nov 2015 20:30:00 +1200");
     // var eventStart = new Date("15 Aug 2015 20:30:00 +1200");
@@ -17,23 +21,22 @@
 
 
     // Calculate the difference in seconds between the future and current date
-    var diff = eventStart.getTime() / 1000 - currentDate.getTime() / 1000;
+    // var diff = eventStart.getTime() / 1000 - currentDate.getTime() / 1000;
 
     // Instantiate a coutdown FlipClock
     // clock = $('.clock').FlipClock(diff, {
     clock = $('.clock').FlipClock(eventStart, {
       clockFace: 'MonthlyCounter',
-      // clockFace: 'WeeklyCounter',
       countdown: true,
     });
 
     window.setInterval(function () {
-		var timer = clock.getTime();
-		$("#text-clock .months .number").text(timer.getMonths());
-		$("#text-clock .days .number").text(timer.getDays());
-		$("#text-clock .hours .number").text(timer.getHours(true));
-		$("#text-clock .minutes .number").text(timer.getMinutes(true));
-		$("#text-clock .seconds .number").text(timer.getSeconds(true));
+      var timer = clock.getTime();
+      $("#text-clock .months .number").text(timer.getMonths());
+      $("#text-clock .days .number").text(timer.getDays());
+      $("#text-clock .hours .number").text(timer.getHours(true));
+      $("#text-clock .minutes .number").text(timer.getMinutes(true));
+      $("#text-clock .seconds .number").text(timer.getSeconds(true));
     }, 1000);
 
 
@@ -46,14 +49,18 @@
   // Label: Identifier for action taken: tweet_id, screen_name/user_id, click region
 
   // Define our custom event handlers
-  function clickEventToAnalytics (intentEvent) {
-    if (!intentEvent) return;
+  function clickEventToAnalytics(intentEvent) {
+    if (!intentEvent) {
+      return;
+    }
     var label = intentEvent.region;
     pageTracker._trackEvent('twitter_web_intents', intentEvent.type, label);
   }
 
-  function tweetIntentToAnalytics (intentEvent) {
-    if (!intentEvent) return;
+  function tweetIntentToAnalytics(intentEvent) {
+    if (!intentEvent) {
+      return;
+    }
     var label = "tweet";
     pageTracker._trackEvent(
       'twitter_web_intents',
@@ -82,3 +89,5 @@
       }
     );
   });
+
+}());
