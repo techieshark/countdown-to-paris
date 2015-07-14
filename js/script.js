@@ -26,6 +26,17 @@
       // clockFace: 'WeeklyCounter',
       countdown: true,
     });
+
+    window.setInterval(function () {
+		var timer = clock.getTime();
+		$("#text-clock .months .number").text(timer.getMonths());
+		$("#text-clock .days .number").text(timer.getDays());
+		$("#text-clock .hours .number").text(timer.getHours(true));
+		$("#text-clock .minutes .number").text(timer.getMinutes(true));
+		$("#text-clock .seconds .number").text(timer.getSeconds(true));
+    }, 1000);
+
+
   });
 
 
