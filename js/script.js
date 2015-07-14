@@ -75,7 +75,7 @@
       'https://techieshark.github.io/countdown-to-paris/',
       document.getElementById('tweet-container'),
       {
-        text: 'Only ' + clock.getTime().getMonths() + ' months ' + clock.getTime().getDays() + ' days ' + countdown + ' until the #COP21 Paris #climate talks. And the time for action: NOW.',
+        text: 'Only ' + clock.getTime().getMonths() + ' months, ' + clock.getTime().getDays() + ' days, ' + countdown + ' until the #COP21 Paris #climate talks. The time for action: NOW.',
         hashtags: 'cntdwn2paris',
         size: 'large',
         counturl: 'http://www.theguardian.com/world/2015/jun/14/paris-climate-meeting-vital'
