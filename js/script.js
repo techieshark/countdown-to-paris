@@ -38,9 +38,27 @@ var window, twttr;
       $("#text-clock .minutes .number").text(timer.getMinutes(true));
       $("#text-clock .seconds .number").text(timer.getSeconds(true));
     }, 1000);
-
-
   });
+
+
+  var pluralizeTime = function (word, number) {
+    return word + (number !== 1 ? 's' : '');
+  };
+
+  var timerComponents = function (timer) {
+    var m = timer.getMonths();
+    var d = timer.getDays();
+    var h = timer.getHours(true);
+    var min = timer.getMinutes(true);
+    var s = timer.getSeconds(true);
+    return {
+      month: { value: m, label: pluralizeTime('month', m) },
+      day: { value: d, label: pluralizeTime('day', d) },
+      hour: { value: h, label: pluralizeTime('day', h) },
+      minute: { value: min, label: pluralizeTime('day', min) },
+      second: { value: s, label: pluralizeTime('day', s) }
+    };
+  }
 
 
   // Log any kind of Web Intent event to Google Analytics
@@ -76,13 +94,14 @@ var window, twttr;
     twttr.events.bind('tweet', tweetIntentToAnalytics);
 
     var timer = clock.getTime();
-    var countdown = timer.getHours(true) + 'h ' + timer.getMinutes(true) + 'm ' + timer.getSeconds(true) + 's';
+    var components = timerComponents(timer);
+    var countdown = components.hour.value + 'h ' + components.minute.value + 'm ' + components.second.value + 's';
 
     twttr.widgets.createShareButton(
       'https://techieshark.github.io/countdown-to-paris/',
       document.getElementById('tweet-container'),
       {
-        text: 'Only ' + clock.getTime().getMonths() + ' months, ' + clock.getTime().getDays() + ' days, ' + countdown + ' until the #COP21 Paris #climate talks. The time for action: NOW.',
+        text: 'Only ' + components.month.value + ' ' + components.month.label + ', ' + components.day.value + ' ' + components.day.label + ', ' + countdown + ' until the #COP21 Paris #climate talks. The time for action: NOW.',
         hashtags: 'cntdwn2paris',
         size: 'large',
         counturl: 'http://www.theguardian.com/world/2015/jun/14/paris-climate-meeting-vital'
