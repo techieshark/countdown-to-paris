@@ -1347,7 +1347,57 @@ var FlipClock;
 
 			return new Date((new Date()).getTime() + this.getTimeSeconds() * 1000);
 		},
-		
+
+		/**
+		 * Gets a digitized monthly counter
+		 *
+		 * @return  object  Returns a digitized object
+		 */
+
+		getMonthCounter: function(includeSeconds) {
+			var digits = [
+				this.getMonths(),
+				this.getDays(),
+				// (this.getMonths() + 1) * 30 - this.getDays(),
+				this.getHours(true),
+				this.getMinutes(true)
+			];
+
+			if(includeSeconds) {
+				digits.push(this.getSeconds(true));
+			}
+
+			return this.digitize(digits);
+		},
+
+
+		/**
+		 * Gets number of months
+		 *
+		 * @param   bool  Should perform a modulus? If not sent, then no.
+		 * @return  int   Retuns a floored integer
+		 */
+		 
+		getMonths: function(mod) {
+			// var months = this.getTimeSeconds() / 60 / 60 / 24 / 30;
+
+			// compare end month to current month
+			var endTime = this.time;
+			var endMonth = endTime.getFullYear() * 12 + endTime.getMonth();
+			var endDate = endTime.getDate();
+			var now = new Date();
+			var thisMonth = now.getFullYear() * 12 + now.getMonth();
+			var thisDate = now.getDate();
+
+			var months = endMonth - thisMonth;
+
+			if (endMonth > thisMonth && endDate < thisDate) {
+				months--; // don't count partial months (less than one full month)
+			}
+
+			return Math.floor(months);
+		},
+
 		/**
 		 * Gets a digitized daily counter
 		 *
@@ -1367,7 +1417,6 @@ var FlipClock;
 
 			return this.digitize(digits);
 		},
-
 
 		/**
 		 * Gets a digitized weekly counter
@@ -1398,6 +1447,23 @@ var FlipClock;
 		 */
 		 
 		getDays: function(mod) {
+
+
+			if (this.time instanceof Date && this.factory.countdown) {
+
+           		// compare end month to current month
+				var endTime = this.time;
+				var endMonth = endTime.getFullYear() * 12 + endTime.getMonth();
+				var endDate = endTime.getDate();
+				var now = new Date();
+				var thisMonth = now.getFullYear() * 12 + now.getMonth();
+				var thisDate = now.getDate();
+				if (endMonth > thisMonth && endDate >= thisDate) {
+				    // count partial months differently
+				    return endTime.getDate() - now.getDate();
+				}
+			}
+
 			var days = this.getTimeSeconds() / 60 / 60 / 24;
 			
 			if(mod) {
@@ -2164,90 +2230,6 @@ var FlipClock;
 	});
 
 }(jQuery));
-
-
-(function($) {
-
-/**
-	 * Daily Counter Clock Face
-	 *
-	 * This class will generate a daily counter for FlipClock.js. A
-	 * daily counter will track days, hours, minutes, and seconds. If
-	 * the number of available digits is exceeded in the count, a new
-	 * digit will be created.
-	 *
-	 * @param  object  The parent FlipClock.Factory object
-	 * @param  object  An object of properties to override the default
-	 */
-
-	FlipClock.WeeklyCounterFace = FlipClock.Face.extend({
-
-		showSeconds: true,
-
-		/**
-		 * Constructor
-		 *
-		 * @param  object  The parent FlipClock.Factory object
-		 * @param  object  An object of properties to override the default
-		 */
-
-		constructor: function(factory, options) {
-			this.base(factory, options);
-		},
-
-		/**
-		 * Build the clock face
-		 */
-
-		build: function(time) {
-			var t = this;
-			var children = this.factory.$el.find('ul');
-			var offset = 0;
-
-			time = time ? time : this.factory.time.getWeekCounter(this.showSeconds);
-
-			if(time.length > children.length) {
-				$.each(time, function(i, digit) {
-					t.createList(digit);
-				});
-			}
-
-			if(this.showSeconds) {
-				$(this.createDivider('Seconds')).insertBefore(this.lists[this.lists.length - 2].$el);
-			}
-			else
-			{
-				offset = 2;
-			}
-
-			$(this.createDivider('Minutes')).insertBefore(this.lists[this.lists.length - 4 + offset].$el);
-			$(this.createDivider('Hours')).insertBefore(this.lists[this.lists.length - 6 + offset].$el);
-			$(this.createDivider('Days')).insertBefore(this.lists[this.lists.length - 8 + offset].$el);
-			$(this.createDivider('Weeks', true)).insertBefore(this.lists[0].$el);
-
-
-			this.base();
-		},
-
-		/**
-		 * Flip the clock face
-		 */
-
-		flip: function(time, doNotAddPlayClass) {
-			if(!time) {
-				time = this.factory.time.getWeekCounter(this.showSeconds);
-			}
-
-			this.autoIncrement();
-
-			this.base(time, doNotAddPlayClass);
-		}
-
-	});
-}(jQuery));
-
-
-
 (function($) {
 			
 	/**
@@ -2382,6 +2364,91 @@ var FlipClock;
 	
 }(jQuery));
 (function($) {
+
+	/**
+	 * Monthly Counter Clock Face
+	 *
+	 * This class will generate a monthly counter for FlipClock.js. A
+	 * monthly counter will track months, days, hours, minutes, and seconds. If
+	 * the number of available digits is exceeded in the count, a new
+	 * digit will be created.
+	 *
+	 * @param  object  The parent FlipClock.Factory object
+	 * @param  object  An object of properties to override the default
+	 */
+
+	FlipClock.MonthlyCounterFace = FlipClock.Face.extend({
+
+		showSeconds: true,
+
+		/**
+		 * Constructor
+		 *
+		 * @param  object  The parent FlipClock.Factory object
+		 * @param  object  An object of properties to override the default
+		 */
+
+		constructor: function(factory, options) {
+			this.base(factory, options);
+		},
+
+		/**
+		 * Build the clock face
+		 */
+
+		build: function(time) {
+			var t = this;
+			var children = this.factory.$el.find('ul');
+			var offset = 0;
+
+			time = time ? time : this.factory.time.getMonthCounter(this.showSeconds);
+
+			if(time.length > children.length) {
+				$.each(time, function(i, digit) {
+					t.createList(digit);
+				});
+			}
+
+			if(this.showSeconds) {
+				$(this.createDivider('Seconds')).insertBefore(this.lists[this.lists.length - 2].$el);
+			}
+			else
+			{
+				offset = 2;
+			}
+
+			$(this.createDivider('Minutes')).insertBefore(this.lists[this.lists.length - 4 + offset].$el);
+			$(this.createDivider('Hours')).insertBefore(this.lists[this.lists.length - 6 + offset].$el);
+			$(this.createDivider('Days')).insertBefore(this.lists[this.lists.length - 8 + offset].$el);
+			$(this.createDivider('Months', true)).insertBefore(this.lists[0].$el);
+
+
+			this.base();
+		},
+
+		/**
+		 * Flip the clock face
+		 */
+
+		flip: function(time, doNotAddPlayClass) {
+			if(!time) {
+				time = this.factory.time.getMonthCounter(this.showSeconds);
+			}
+
+			// HACK? - commenting this out because it was resulting
+			// in time counting down two seconds at once (it is
+			// decreasing the end time by one second, while the universe
+			// progresses toward the end time by one second, which adds to two).
+			// Need to check if it still works when a diff-number-of-seconds
+			// is passed in rather than an end date. TODO
+			// this.autoIncrement();
+
+			this.base(time, doNotAddPlayClass);
+		}
+
+	});
+}(jQuery));
+(function($) {
 		
 	/**
 	 * Twelve Hour Clock Face
@@ -2474,6 +2541,85 @@ var FlipClock;
 				
 	});
 	
+}(jQuery));
+(function($) {
+
+	/**
+	 * Weekly Counter Clock Face
+	 *
+	 * This class will generate a weekly counter for FlipClock.js. A
+	 * weekly counter will track weeks, days, hours, minutes, and seconds. If
+	 * the number of available digits is exceeded in the count, a new
+	 * digit will be created.
+	 *
+	 * @param  object  The parent FlipClock.Factory object
+	 * @param  object  An object of properties to override the default
+	 */
+
+	FlipClock.WeeklyCounterFace = FlipClock.Face.extend({
+
+		showSeconds: true,
+
+		/**
+		 * Constructor
+		 *
+		 * @param  object  The parent FlipClock.Factory object
+		 * @param  object  An object of properties to override the default
+		 */
+
+		constructor: function(factory, options) {
+			this.base(factory, options);
+		},
+
+		/**
+		 * Build the clock face
+		 */
+
+		build: function(time) {
+			var t = this;
+			var children = this.factory.$el.find('ul');
+			var offset = 0;
+
+			time = time ? time : this.factory.time.getWeekCounter(this.showSeconds);
+
+			if(time.length > children.length) {
+				$.each(time, function(i, digit) {
+					t.createList(digit);
+				});
+			}
+
+			if(this.showSeconds) {
+				$(this.createDivider('Seconds')).insertBefore(this.lists[this.lists.length - 2].$el);
+			}
+			else
+			{
+				offset = 2;
+			}
+
+			$(this.createDivider('Minutes')).insertBefore(this.lists[this.lists.length - 4 + offset].$el);
+			$(this.createDivider('Hours')).insertBefore(this.lists[this.lists.length - 6 + offset].$el);
+			$(this.createDivider('Days')).insertBefore(this.lists[this.lists.length - 8 + offset].$el);
+			$(this.createDivider('Weeks', true)).insertBefore(this.lists[0].$el);
+
+
+			this.base();
+		},
+
+		/**
+		 * Flip the clock face
+		 */
+
+		flip: function(time, doNotAddPlayClass) {
+			if(!time) {
+				time = this.factory.time.getWeekCounter(this.showSeconds);
+			}
+
+			this.autoIncrement();
+
+			this.base(time, doNotAddPlayClass);
+		}
+
+	});
 }(jQuery));
 (function($) {
 
