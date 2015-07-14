@@ -2,13 +2,26 @@
   $(document).ready(function () {
     // Grab the current date
     var currentDate = new Date();
-    var eventStart = new Date("Nov 30, 2015");
+    var eventStart = new Date("30 Nov 2015 09:00:00 +0100");
+    // var eventStart = new Date("30 Nov 2015 20:30:00 +1200");
+    // var eventStart = new Date("15 Aug 2015 20:30:00 +1200");
+    // var eventStart = new Date("14 Aug 2015 20:30:00 +1200");
+    // var eventStart = new Date("13 Aug 2015 20:30:00 +1200");
+    // var eventStart = new Date("12 Aug 2015 20:30:00 +1200");
+    // var eventStart = new Date("11 Aug 2015 20:30:00 +1200");
+    // var eventStart = new Date("04 Aug 2015 20:30:00 +1200");
+    // var eventStart = new Date("28 July 2015 20:30:00 +1200");
+    // var eventStart = new Date("21 July 2015 20:30:00 +1200");
+    // var eventStart = new Date("15 July 2015 20:30:00 +1200");
+    // var eventStart = new Date("14 July 2015 20:30:00 +1200");
+
 
     // Calculate the difference in seconds between the future and current date
     var diff = eventStart.getTime() / 1000 - currentDate.getTime() / 1000;
 
     // Instantiate a coutdown FlipClock
-    clock = $('.clock').FlipClock(diff, {
+    // clock = $('.clock').FlipClock(diff, {
+    clock = $('.clock').FlipClock(eventStart, {
       clockFace: 'MonthlyCounter',
       // clockFace: 'WeeklyCounter',
       countdown: true,
