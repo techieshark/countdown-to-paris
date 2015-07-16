@@ -37,6 +37,13 @@ var window, twttr;
       $("#text-clock .hours .number").text(timer.getHours(true));
       $("#text-clock .minutes .number").text(timer.getMinutes(true));
       $("#text-clock .seconds .number").text(timer.getSeconds(true));
+
+      $("#text-clock2 .months .number").text(timer.getMonths());
+      $("#text-clock2 .days .number").text(timer.getDays());
+      $("#text-clock2 .hours .number").text(timer.getHours(true));
+      $("#text-clock2 .minutes .number").text(timer.getMinutes(true));
+      $("#text-clock2 .seconds .number").text(timer.getSeconds(true));
+
     }, 1000);
   });
 
