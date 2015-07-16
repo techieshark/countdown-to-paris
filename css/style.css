@@ -7,6 +7,35 @@
 	margin-bottom: 36px;
 }
 
+.tweet {
+	border: 1px solid rgb(237, 237, 237);
+	/* padding: 1em; */
+	border-radius: 3px;
+}
+
+.tweet p {
+	margin: 1em;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.tweet a {
+	text-decoration: none;
+}
+
+.tweet .button-container {
+	/* text-align: center; */
+}
+
+.tweet .tweet-button {
+    /* margin-right: 1em; */
+    /* width: 50%; */
+    border: 0;
+    background-color: #333;
+    color: white;
+    /* margin: 0 auto; */
+    margin-left: 1em;
+}
+
 div#tweet-container > * {
 	margin-right: 1em; /* space between twitter buttons */
 }
