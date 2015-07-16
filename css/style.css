@@ -11,6 +11,14 @@
 	border: 1px solid rgb(237, 237, 237);
 	/* padding: 1em; */
 	border-radius: 3px;
+	/* border: 1px solid white; */
+	/* border: none; */
+	/* padding-left: 2em; */
+	background-color: rgb(250, 250, 250);
+	margin: 0 auto;
+	float: left;
+	padding-left: 1em;
+	padding-right: 1em;
 }
 
 .tweet p {
@@ -34,6 +42,16 @@
     color: white;
     /* margin: 0 auto; */
     margin-left: 1em;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: firebrick;
+    margin-bottom: 15px;
+}
+
+.tweet-button .fa {
+	top: 3px;
+	position: relative;
+	margin-right: 0.2em;
 }
 
 div#tweet-container > * {
