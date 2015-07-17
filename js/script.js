@@ -63,7 +63,7 @@ var window, twttr;
 
     $('.tweet-button').click(function () {
       // launch new window with tweet content
-      tweet('Only 4 months, 13 days, 3h 35m 38s until the Paris Climate talks',
+      tweet('Only ' + getTwitterClockText() + ' until the Paris Climate talks',
         'http://climate-countdown.com',
         'COP21,cntdwn2paris');
     });
@@ -90,6 +90,12 @@ var window, twttr;
     };
   };
 
+  var getTwitterClockText = function () {
+    var timer = clock.getTime();
+    var components = timerComponents(timer);
+    var countdown = components.hour.value + 'h ' + components.minute.value + 'm ' + components.second.value + 's';
+    return components.month.value + ' ' + components.month.label + ', ' + components.day.value + ' ' + components.day.label + ', ' + countdown;
+  };
 
   // Log any kind of Web Intent event to Google Analytics
   // Category: "twitter_web_intents"
@@ -123,15 +129,11 @@ var window, twttr;
     twttr.events.bind('click', clickEventToAnalytics);
     twttr.events.bind('tweet', tweetIntentToAnalytics);
 
-    var timer = clock.getTime();
-    var components = timerComponents(timer);
-    var countdown = components.hour.value + 'h ' + components.minute.value + 'm ' + components.second.value + 's';
-
     twttr.widgets.createShareButton(
       'https://techieshark.github.io/countdown-to-paris/',
       document.getElementById('tweet-container'),
       {
-        text: 'Only ' + components.month.value + ' ' + components.month.label + ', ' + components.day.value + ' ' + components.day.label + ', ' + countdown + ' until the #COP21 Paris #climate talks. The time for action: NOW.',
+        text: 'Only ' + getTwitterClockText() + ' until the #COP21 Paris #climate talks. The time for action: NOW.',
         hashtags: 'cntdwn2paris',
         size: 'large',
         counturl: 'http://www.theguardian.com/world/2015/jun/14/paris-climate-meeting-vital'
