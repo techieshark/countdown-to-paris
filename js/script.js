@@ -45,6 +45,26 @@ var window, twttr;
       $("#text-clock2 .seconds .number").text(timer.getSeconds(true));
 
     }, 1000);
+
+
+    var tweet = function (phrase, url, hashtags) {
+      var tweetUrl = 'https://twitter.com/intent/tweet?text=' +
+        encodeURIComponent(phrase) +
+        '&url=' + encodeURI(url) +
+        '&hashtags=' + hashtags;
+      window.open(tweetUrl, '', 'width=550,height=300,chrome=yes,centerscreen');
+
+      var width = 550, height = 300;
+    };
+
+
+    $('.tweet-button').click(function () {
+      // launch new window with tweet content
+      tweet('Only 4 months, 13 days, 3h 35m 38s until the Paris Climate talks',
+        'http://climate-countdown.com',
+        'COP21,cntdwn2paris');
+    });
+
   });
 
 
@@ -65,7 +85,7 @@ var window, twttr;
       minute: { value: min, label: pluralizeTime('day', min) },
       second: { value: s, label: pluralizeTime('day', s) }
     };
-  }
+  };
 
 
   // Log any kind of Web Intent event to Google Analytics
