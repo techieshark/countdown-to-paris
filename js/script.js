@@ -52,9 +52,12 @@ var window, twttr;
         encodeURIComponent(phrase) +
         '&url=' + encodeURI(url) +
         '&hashtags=' + hashtags;
-      window.open(tweetUrl, '', 'width=550,height=300,chrome=yes,centerscreen');
 
       var width = 550, height = 300;
+      var left = (window.screen.width - width) / 2;
+      var top = (window.screen.height - height) / 2;
+      var params = 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left + ', resizable=1';
+      window.open(tweetUrl, '', params);
     };
 
 
