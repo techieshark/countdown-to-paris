@@ -19,6 +19,7 @@
 	float: left;
 	padding-left: 1em;
 	padding-right: 1em;
+	margin-bottom: 2em;
 }
 
 .tweet p {
@@ -213,13 +214,36 @@ div#tweet-container > * {
 }
 
 /* On small screens we just can't fit the fancy countdown */
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 501px) {
 	#text-clock {
+		display: none;
+	}
+
+	.tweet-button .center.fa {
 		display: none;
 	}
 }
 @media screen and (max-width: 500px) {
 	.clock {
+		display: none;
+	}
+
+	.tweet {
+		padding-left: 0;
+	}
+
+	/* its yoru turn, bird, send this to the world */
+	.tweet-button {
+		height: 11em;
+	}
+
+	.tweet-button .center.fa {
+		display: block; /* center bird on it's own line. */
+	
+		margin-bottom: 0.5em;
+}
+
+	.tweet-button .left.fa {
 		display: none;
 	}
 }
