@@ -127,17 +127,6 @@ var window, twttr;
     // Now bind our custom intent events
     twttr.events.bind('click', clickEventToAnalytics);
     twttr.events.bind('tweet', tweetIntentToAnalytics);
-
-    twttr.widgets.createShareButton(
-      'https://techieshark.github.io/countdown-to-paris/',
-      document.getElementById('tweet-container'),
-      {
-        text: 'Only ' + getTwitterClockText() + ' until the #COP21 Paris #climate talks. The time for action: NOW.',
-        hashtags: 'cntdwn2paris',
-        size: 'large',
-        counturl: 'http://www.theguardian.com/world/2015/jun/14/paris-climate-meeting-vital'
-      }
-    );
   });
 
 }());
