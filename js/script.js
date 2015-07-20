@@ -1,4 +1,4 @@
-var window, twttr;
+var window, twttr, ga;
 
 (function () {
 
@@ -91,6 +91,8 @@ var window, twttr;
       tweet('Only ' + getTwitterClockText() + ' until the Paris Climate talks',
         'http://climate-countdown.com',
         'COP21,cntdwn2paris');
+      ga('send', 'event', 'twitter_web_intents', 'click', 'label', 'type');
+
     });
 
   });
@@ -107,7 +109,8 @@ var window, twttr;
       return;
     }
     var label = intentEvent.region;
-    pageTracker._trackEvent('twitter_web_intents', intentEvent.type, label);
+    // pageTracker._trackEvent('twitter_web_intents', intentEvent.type, label);
+    ga('send', 'event', 'twitter_web_intents', 'click', intentEvent.type, label);
   }
 
   function tweetIntentToAnalytics(intentEvent) {
@@ -115,11 +118,13 @@ var window, twttr;
       return;
     }
     var label = "tweet";
-    pageTracker._trackEvent(
-      'twitter_web_intents',
-      intentEvent.type,
-      label
-    );
+    // pageTracker._trackEvent(
+    //   'twitter_web_intents',
+    //   intentEvent.type,
+    //   label
+    // );
+    ga('send', 'event', 'twitter_web_intents', 'click', intentEvent.type, label);
+
   }
 
   // Wait for the asynchronous resources to load
