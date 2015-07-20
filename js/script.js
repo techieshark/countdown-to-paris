@@ -44,6 +44,21 @@ var window, twttr, ga;
     window.open(tweetUrl, '', params);
   };
 
+
+  /**
+  * Function that tracks a click on an outbound link in Google Analytics.
+  * This function takes a valid URL string as an argument, and uses that URL string
+  * as the event label. - https://support.google.com/analytics/answer/1136920?hl=en
+  */
+  var trackOutboundLink = function (url) {
+    ga('send', 'event', 'outbound', url, url, {'hitCallback':
+      function () {
+        // document.location = url;
+        window.open(url, '_blank');
+      }
+      });
+  };
+
   $(document).ready(function () {
     // Grab the current date
     var eventStart = new Date("30 Nov 2015 09:00:00 +0100");
@@ -93,6 +108,12 @@ var window, twttr, ga;
         'COP21,cntdwn2paris');
       ga('send', 'event', 'twitter_web_intents', 'click', 'label', 'type');
 
+    });
+
+    $('a').click(function (e) {
+      // console.log('tracking visit to ' + e.target.href);
+      e.preventDefault();
+      trackOutboundLink(e.target.href);
     });
 
   });
