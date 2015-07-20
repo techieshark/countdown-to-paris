@@ -103,10 +103,10 @@ var window, twttr, ga;
 
     $('.tweet-button').click(function () {
       // launch new window with tweet content
-      tweet('Only ' + getTwitterClockText() + ' until the Paris Climate talks',
-        'http://climate-countdown.com',
-        'COP21,cntdwn2paris');
-      ga('send', 'event', 'twitter_web_intents', 'click', 'label', 'type');
+      var timeLeft = getTwitterClockText();
+      var text = 'Only ' + timeLeft + ' until the Paris Climate talks';
+      tweet(text, 'http://climate-countdown.com', 'COP21,cntdwn2paris');
+      ga('send', 'event', 'twitter', 'click', timeLeft);
 
     });
 
