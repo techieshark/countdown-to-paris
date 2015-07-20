@@ -105,7 +105,7 @@ var window, twttr, ga;
       // launch new window with tweet content
       var timeLeft = getTwitterClockText();
       var text = 'Only ' + timeLeft + ' until the Paris Climate talks';
-      tweet(text, 'http://climate-countdown.com', 'COP21,cntdwn2paris');
+      tweet(text, 'http://climate-countdown.com', 'COP21,cntdwn2paris,');
       ga('send', 'event', 'twitter', 'click', timeLeft);
 
     });
