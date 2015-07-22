@@ -213,6 +213,13 @@ div#tweet-container > * {
 	}
 }
 
+@media screen and (max-width: 700px) {
+	.site-header a {
+		/* at small sizes, 'Paris Climate Talks' should break onto its own line (together) */
+		display: block;
+	}
+}
+
 /* On small screens we just can't fit the fancy countdown */
 @media screen and (min-width: 501px) {
 	#text-clock {
